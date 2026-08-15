@@ -25,8 +25,12 @@ A compatible assistant can resolve artifacts by stable ID, alias, name, or inten
 /skills documentation
 /skill kb-writer
 /prompt prompt.work.documentation.design-document
-Use the preserve-voice macro on this paragraph.
+/macro Turn this recurring workflow into a reusable capability.
+/prompt-engineer Create a reusable prompt for this request.
+/voice [a passage]
 ```
+
+Natural-language aliases are also registered where they improve usability, including **Make this a macro**, **Act as a prompt engineer**, and **Keep my voice**.
 
 Resolution follows `catalog.yml`:
 
@@ -49,13 +53,18 @@ prompt-library/
 │   └── skill-system.md         # routing and authoring contract
 ├── macros/
 │   ├── README.md
-│   └── list-skills.md
+│   ├── create-macro.md
+│   ├── list-skills.md
+│   ├── preserve-voice.md
+│   └── prompt-engineer.md
 ├── schemas/
 │   └── catalog.schema.json
 ├── scripts/
 │   └── validate_catalog.py
 ├── skills/
 │   ├── README.md
+│   ├── registry-author/
+│   │   └── SKILL.md
 │   └── registry-router/
 │       └── SKILL.md
 ├── templates/
@@ -86,6 +95,8 @@ Existing prompt paths remain stable. The registry extends the repository without
    ```
 
 7. **Commit intentionally.** The stable ID should survive renames and moves whenever practical.
+
+Inside the Living Grimoire, `/create-macro`, `/macro`, or the phrase **Make this a macro** invokes `skill.meta.registry-author`, which performs classification, duplicate search, artifact selection, authoring, registration, validation, and versioning.
 
 ## Data Membrane
 
