@@ -1,62 +1,303 @@
-schema_version: 1
+# yaml-language-server: $schema=schemas/catalog.schema.json
+schema_version: 2
+
 repository:
   artifact_id: project.prompt-library
   canonical_home: github
-  classification: public
+  classification: Public
+  purpose: Public, versioned registry of reusable AI prompts, macro aliases, and composable skills.
+  canonical_content: markdown
+  registry: catalog.yml
+  agent_contract: AGENTS.md
+
+invocation:
+  activation: explicit
+  patterns:
+    - "Use macro: <alias>"
+    - "Invoke <artifact-id>"
+    - "Load skill: <alias-or-id>"
+  resolution_order:
+    - artifact_id
+    - macro_alias
+    - canonical_path
+    - unique_name_or_tag
+  ambiguity: surface_candidates
+  missing_artifact: report_and_do_not_invent
+
+classification_policy:
+  allowed:
+    - Public
+    - Professional Portfolio
+  forbidden:
+    - Personal Private
+    - Employer Confidential
+    - Secrets
+  private_material: Store only in an authorized private overlay; keep reusable public logic here.
+
 artifacts:
+  - id: prompt.meta.custom-macro-builder
+    kind: prompt
+    name: Custom Macro Builder
+    path: meta/custom-macro-builder.md
+    domain: meta
+    summary: Convert a rough request or recurring conversation pattern into a deduplicated, classified, registered, and versioned prompt-library macro.
+    macros:
+      - create-macro
+      - macro-builder
+    tags:
+      - prompt-engineering
+      - authoring
+      - registry
+      - classification
+      - version-control
+    status: active
+    classification: Public
+
   - id: prompt.learning.create-learning-lab
+    kind: prompt
+    name: Create a Learning Lab
     path: learning/create-a-learning-lab.md
     domain: learning
+    summary: Establish an iterative learning space where notes, questions, experiments, and explanations build into practical understanding.
+    macros:
+      - learning-lab
+      - create-learning-lab
+    tags:
+      - learning
+      - tutoring
+      - notes
+      - practice
     status: active
+    classification: Public
+
   - id: prompt.meta.prompt-library-archaeologist
+    kind: prompt
+    name: Prompt Library Archaeologist
     path: meta/prompt-library-archaeologist.md
     domain: meta
+    summary: Examine a prompt collection for reusable artifacts, duplicates, taxonomy gaps, and candidates for refinement or retirement.
+    macros:
+      - prompt-archaeologist
+      - garden-prompt-library
+    tags:
+      - prompt-engineering
+      - catalog
+      - deduplication
+      - taxonomy
     status: active
+    classification: Public
+
   - id: prompt.template.universal-prompt-engineer
+    kind: prompt
+    name: Universal Prompt Engineer
     path: templates/universal-prompt-engineer.md
     domain: templates
+    summary: Turn a rough request into a clear, reusable, outcome-focused prompt with inputs, constraints, and success criteria.
+    macros:
+      - prompt-engineer
+      - build-a-prompt
+    tags:
+      - prompt-engineering
+      - template
+      - requirements
+      - reusable
     status: active
+    classification: Public
+
   - id: prompt.work.documentation.kb-writer
+    kind: prompt
+    name: Audience-Aware Internal KB Writer
     path: work/documentation/audience-aware-internal-kb-writer.md
     domain: work.documentation
+    summary: Convert dense or fragmented source material into an accurate knowledge article calibrated to a defined audience's comprehension and needs.
+    macros:
+      - kb-writer
+      - audience-aware-kb
+    tags:
+      - knowledge-management
+      - technical-writing
+      - audience
+      - explanation
+      - itil
     status: active
+    classification: Public
+
   - id: prompt.work.documentation.cyber-risk-decision-action-record
+    kind: prompt
+    name: Cyber Risk Decision and Action Record
     path: work/documentation/cyber-risk-decision-action-record.md
     domain: work.documentation
+    summary: Extract cyber-risk decisions, evidence, ownership, remediation commitments, disagreements, and open actions from a conversation.
+    macros:
+      - cyber-risk-record
+      - cyber-risk-actions
+    tags:
+      - cybersecurity
+      - risk
+      - decisions
+      - actions
+      - governance
     status: active
+    classification: Public
+
   - id: prompt.work.documentation.break-fix-runbook
+    kind: prompt
+    name: ITIL-Aligned Break/Fix Runbook Builder
     path: work/documentation/itil-aligned-break-fix-runbook-builder.md
     domain: work.documentation
+    summary: Turn troubleshooting and break/fix notes into a repeatable operational runbook with validation, escalation, rollback, and service context.
+    macros:
+      - break-fix-runbook
+      - runbook-builder
+    tags:
+      - runbook
+      - incident-management
+      - troubleshooting
+      - operations
+      - itil
     status: active
+    classification: Public
+
   - id: prompt.work.documentation.design-document
+    kind: prompt
+    name: ITIL-Aligned Design Document Builder
     path: work/documentation/itil-aligned-design-document-builder.md
     domain: work.documentation
+    summary: Develop rough requirements and technical notes into a service-aware design document covering outcomes, architecture, risk, governance, validation, and transition.
+    macros:
+      - design-document
+      - design-doc-builder
+    tags:
+      - design
+      - architecture
+      - service-management
+      - change
+      - itil
     status: active
+    classification: Public
+
   - id: prompt.work.documentation.raw-notes-to-sop
+    kind: prompt
+    name: Raw Notes to SOP
     path: work/documentation/raw-notes-to-sop.md
     domain: work.documentation
+    summary: Convert fragmented notes and process knowledge into a clear, controlled standard operating procedure for repeatable work.
+    macros:
+      - notes-to-sop
+      - sop-builder
+    tags:
+      - sop
+      - process
+      - documentation
+      - operations
+      - standardization
     status: active
+    classification: Public
+
   - id: prompt.work.governance.contractor-registry
+    kind: prompt
+    name: Contractor Registry Builder
     path: work/governance/contractor-registry-builder.md
     domain: work.governance
+    summary: Transform contractor account data into a governed registry covering sponsorship, duration, licensing, privilege, review cadence, and unresolved ownership.
+    macros:
+      - contractor-registry
+      - contractor-governance
+    tags:
+      - identity-governance
+      - contractors
+      - access
+      - licensing
+      - review
     status: active
+    classification: Public
+
   - id: prompt.work.microsoft-365.tenant-health-digest
+    kind: prompt
+    name: Microsoft 365 Tenant Health Digest
     path: work/microsoft-365/m365-tenant-health-digest.md
     domain: work.microsoft-365
+    summary: Synthesize Microsoft 365 operational checks, alerts, exceptions, and trends into a concise health digest with risks and follow-up actions.
+    macros:
+      - m365-health-digest
+      - tenant-health-digest
+    tags:
+      - microsoft-365
+      - entra-id
+      - security
+      - operations
+      - health-check
     status: active
+    classification: Public
+
   - id: prompt.work.reporting.weekly-1on1-prep
+    kind: prompt
+    name: Weekly One-on-One Preparation
     path: work/reporting/weekly-1on1-prep.md
     domain: work.reporting
+    summary: Analyze daily updates into a manager-ready one-on-one agenda that makes outcomes visible, surfaces recurring issues, and aligns next priorities.
+    macros:
+      - weekly-1on1
+      - manager-1on1-prep
+    tags:
+      - reporting
+      - manager-update
+      - priorities
+      - outcomes
+      - one-on-one
     status: active
+    classification: Public
+
   - id: prompt.writing.creative.iterative-story-workshop
+    kind: prompt
+    name: Iterative Story Workshop
     path: writing/creative-writing/iterative-story-workshop.md
     domain: writing.creative
+    summary: Develop fiction collaboratively in controlled sections while preserving voice, continuity, character logic, and author approval between stages.
+    macros:
+      - story-workshop
+      - iterative-story
+    tags:
+      - creative-writing
+      - fiction
+      - revision
+      - voice
+      - iterative
     status: active
+    classification: Public
+
   - id: prompt.writing.journaling.journal-pattern-mirror
+    kind: prompt
+    name: Journal Pattern Mirror
     path: writing/journaling/journal-pattern-mirror.md
     domain: writing.journaling
+    summary: Reflect patterns across journal entries while separating evidence from interpretation and preserving the writer's own voice and ambiguity.
+    macros:
+      - journal-pattern-mirror
+      - mirror-check
+    tags:
+      - journaling
+      - reflection
+      - patterns
+      - synthesis
+      - self-inquiry
     status: active
+    classification: Public
+
   - id: prompt.writing.rewriting.preserve-my-voice
+    kind: prompt
+    name: Preserve My Voice Rewriter
     path: writing/rewriting/preserve-my-voice-rewriter.md
     domain: writing.rewriting
+    summary: Improve clarity, flow, and structure without flattening the writer's diction, rhythm, emotional temperature, or idiosyncratic voice.
+    macros:
+      - preserve-my-voice
+      - voice-rewriter
+    tags:
+      - rewriting
+      - editing
+      - voice
+      - style
+      - journaling
     status: active
+    classification: Public

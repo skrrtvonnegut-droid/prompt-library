@@ -1,41 +1,63 @@
 # Prompt Library
 
-A curated library of reusable prompts for technical work, automation, documentation, analysis, learning, writing, and creative exploration.
+A public, versioned registry of reusable AI prompts, named macros, and composable skills for technical work, documentation, analysis, learning, writing, and creative exploration.
 
-Most of the prompts here started as something I actually needed to do: turn messy notes into usable documentation, analyze a problem without losing the nuance, build a repeatable workflow, learn a new tool, or get an AI model to behave more like a thoughtful collaborator than a very confident autocomplete.
+Most artifacts here began as something real that needed doing: turning rough notes into durable documentation, making dense technical material understandable to a particular audience, tracing decisions and risks, learning a tool, or getting an AI assistant to behave more like a thoughtful collaborator than a very confident autocomplete.
 
-## What You'll Find Here
+This repository is not meant to become a heap of clever incantations. It is a small capability system: human-readable instructions, stable identities, explicit invocation names, lifecycle metadata, and Git history.
 
-This library tends to orbit a few recurring themes:
+## The Three Layers
 
-- **Technical and systems work** — prompts for Microsoft 365, identity, automation, administration, troubleshooting, and operational analysis.
-- **Governance and documentation** — turning conversations, exports, processes, and rough notes into structured records, registries, assessments, and action plans.
-- **Prompt engineering** — reusable frameworks for getting clearer, more consistent, and more useful results from AI tools.
-- **Analysis and synthesis** — prompts for extracting themes, comparing information, surfacing risks, tracking decisions, and making complex material easier to work with.
-- **Learning** — tutor, study-companion, and exploratory prompts designed to build understanding rather than just produce answers.
-- **Writing and reflection** — prompts for journaling, rewriting, creative work, and thinking through ideas without sanding off all the interesting edges.
+- **Prompt** — the canonical instruction text stored in Markdown.
+- **Macro** — a stable, human-friendly alias that invokes a prompt, such as `kb-writer` or `prompt-engineer`.
+- **Skill** — a larger capability contract that may include a prompt, supporting references, examples, scripts, or other resources.
 
-## How I Tend to Build Prompts
+A prompt can expose one or more macros without duplicating its content. The Markdown file remains canonical; `catalog.yml` tells agents how to find and invoke it.
 
-I generally prefer prompts that are **specific about the outcome but flexible about the path**. Good prompts should give the model enough context, constraints, and structure to do useful work without trying to script every sentence it produces.
+## Invoking a Macro
 
-A lot of these prompts are built around a few principles:
+Use an explicit invocation when you want deterministic behavior:
 
-- Make the desired outcome explicit.
-- Give the model a useful role or point of view when it improves the work.
-- Separate source material from instructions.
-- Define what should be extracted, analyzed, or produced.
-- Ask for assumptions, uncertainty, risks, and unresolved questions to be surfaced rather than quietly invented away.
-- Prefer reusable frameworks over one-off magic incantations.
+```text
+Use macro: kb-writer
+Audience: non-technical plant managers
+Source material: [paste text or attach documents]
+```
 
-In other words: less **"say the secret words and hope"**, more **"design a small system for thinking."**
+```text
+Invoke prompt.work.documentation.raw-notes-to-sop with these notes:
+[paste notes]
+```
+
+```text
+Find a macro for turning a group-chat discussion into a cyber-risk decision record.
+```
+
+Agents should resolve an exact artifact ID first, then an exact macro alias, and fetch the canonical Markdown file before applying it. The full retrieval and execution contract is defined in [`AGENTS.md`](AGENTS.md).
+
+## What You Will Find Here
+
+- **Technical and systems work** — Microsoft 365, identity, automation, administration, troubleshooting, and operational analysis.
+- **Governance and documentation** — structured records, registries, assessments, runbooks, SOPs, knowledge articles, and action plans.
+- **Prompt engineering** — reusable frameworks for turning rough intentions into clear instructions.
+- **Analysis and synthesis** — extracting themes, comparing evidence, surfacing risks, and tracking decisions.
+- **Learning** — tutor and learning-lab prompts designed to build understanding rather than merely produce answers.
+- **Writing and reflection** — journaling, rewriting, creative work, and nuanced inquiry.
 
 ## Repository Structure
 
 ```text
 prompt-library/
-├── catalog.yml
+├── AGENTS.md                 # Agent retrieval, execution, and safety contract
+├── catalog.yml               # Machine-readable registry and macro aliases
+├── docs/
+│   ├── AUTHORING.md          # How to create, classify, and register artifacts
+│   └── SKILL-CONTRACT.md     # Prompt, macro, and skill specification
+├── schemas/
+│   └── catalog.schema.json   # Editor-readable catalog validation contract
 ├── templates/
+│   ├── macro-template.md     # Scaffold for a new single-file macro
+│   └── universal-prompt-engineer.md
 ├── work/
 │   ├── documentation/
 │   ├── governance/
@@ -51,10 +73,43 @@ prompt-library/
 
 ## Catalog
 
-`catalog.yml` is the machine-readable index for the library. Each published prompt receives a stable artifact ID, repository path, domain, and lifecycle state so the collection can be referenced reliably by other tools and knowledge systems without using filenames as identity.
+`catalog.yml` is the machine-readable registry. Every published capability receives:
 
-The prompt Markdown files remain the canonical content. The catalog describes them; it does not duplicate them.
+- a stable artifact ID;
+- a canonical repository path;
+- a domain and concise summary;
+- one or more globally unique macro aliases;
+- lifecycle and classification metadata;
+- search tags.
+
+The catalog describes and routes to artifacts; it does not copy their prompt text. `schemas/catalog.schema.json` defines the catalog shape for editors and automation.
+
+## Design Principles
+
+- **One truth, many references** — prompt content has one canonical file; catalogs, aliases, and documentation point to it.
+- **Explicit activation by default** — named macros are easier to audit than invisible keyword magic.
+- **Outcome over theatrics** — useful context, constraints, and success criteria matter more than elaborate roleplay.
+- **Stable identity** — IDs and aliases should survive file moves and wording revisions.
+- **Visible uncertainty** — artifacts should surface gaps, assumptions, conflicting evidence, and unresolved questions.
+- **Public by construction** — this repository must not contain personal-private, employer-confidential, or secret material.
+
+## Public Boundary
+
+This repository is public. Only material classified **Public** or intentionally sanitized for a **Professional Portfolio** belongs here.
+
+Do not store passwords, tokens, certificates, private keys, recovery codes, personal-private context, employer-confidential details, proprietary source material, or prompts that depend on those details. Private or organization-specific capabilities belong in a private overlay that references this public foundation.
+
+## Adding a Macro
+
+Invoke the self-hosting authoring macro:
+
+```text
+Use macro: create-macro
+Source material: [rough request, conversation, or existing prompt]
+```
+
+Or start manually with [`templates/macro-template.md`](templates/macro-template.md), then follow [`docs/AUTHORING.md`](docs/AUTHORING.md). Before creating anything new, search the catalog for an existing capability that should be updated, related, or superseded instead.
 
 ## Status
 
-This repository is being built iteratively. Prompt content is reviewed before publication, especially when a prompt began life in a work or personal context.
+This registry is built iteratively. Artifacts are reviewed before publication, especially when they originated in professional or personal work. Git history preserves how each capability evolves without requiring competing durable copies.
