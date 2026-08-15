@@ -4,9 +4,18 @@
 
 ```text
 /create-macro [source material or capability request]
+/macro [source material or capability request]
 ```
 
-Aliases: `create-macro`, `macro-builder`
+Natural-language forms:
+
+```text
+Make this a macro.
+Store this as a macro named [name].
+Turn this recurring workflow into a reusable capability.
+```
+
+Aliases: `/macro`, `create-macro`, `macro-builder`, `make this a macro`, `store this as a macro`
 
 ## Intent
 
@@ -50,7 +59,7 @@ Return the authoring skill's routing decision, artifact identity, validation res
 ## Examples
 
 ```text
-/create-macro Turn these recurring meeting notes into a decision-and-action record.
+/macro Turn these recurring meeting notes into a decision-and-action record.
 ```
 
 ```text
