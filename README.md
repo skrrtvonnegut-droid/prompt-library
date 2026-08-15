@@ -25,7 +25,9 @@ A compatible assistant can resolve artifacts by stable ID, alias, name, or inten
 /skills documentation
 /skill kb-writer
 /prompt prompt.work.documentation.design-document
-Use the preserve-voice macro on this paragraph.
+/prompt-engineer Create a reusable prompt for this workflow.
+/voice [a passage]
+Make this a macro.
 ```
 
 Resolution follows `catalog.yml`:
@@ -49,13 +51,18 @@ prompt-library/
 │   └── skill-system.md         # routing and authoring contract
 ├── macros/
 │   ├── README.md
-│   └── list-skills.md
+│   ├── create-macro.md
+│   ├── list-skills.md
+│   ├── preserve-voice.md
+│   └── prompt-engineer.md
 ├── schemas/
 │   └── catalog.schema.json
 ├── scripts/
 │   └── validate_catalog.py
 ├── skills/
 │   ├── README.md
+│   ├── registry-curator/
+│   │   └── SKILL.md
 │   └── registry-router/
 │       └── SKILL.md
 ├── templates/
@@ -75,7 +82,7 @@ Existing prompt paths remain stable. The registry extends the repository without
 
 1. **Classify it first.** This repository is public. Only `Public` and intentionally sanitized `Professional Portfolio` artifacts belong here.
 2. **Search before creating.** Prefer improving, relating, or superseding an existing artifact over making a near-duplicate.
-3. **Choose the smallest useful type.** Use a macro for compact expansion, a prompt for one reusable instruction set, and a skill when routing, tools, dependencies, or failure handling matter.
+3. **Choose the smallest useful type.** Use a macro for a compact expansion, a prompt for a reusable instruction set, and a skill when routing, tools, dependencies, or failure handling matter.
 4. **Create the canonical Markdown file.** Start from the templates in `templates/`.
 5. **Register it in `catalog.yml`.** Give it a stable ID, aliases, summary, classification, domain, and lifecycle state.
 6. **Validate the catalog.** Run:
@@ -87,12 +94,14 @@ Existing prompt paths remain stable. The registry extends the repository without
 
 7. **Commit intentionally.** The stable ID should survive renames and moves whenever practical.
 
+Inside the Living Grimoire, `/macro` or the phrase **Make this a macro** invokes `skill.meta.registry-curator`, which performs the duplicate search, type selection, classification, authoring, catalog update, and validation workflow.
+
 ## Data Membrane
 
 This public repository may contain:
 
 - `Public`
-- `Professional Portfolio`
+- intentionally sanitized `Professional Portfolio`
 
 It must not contain:
 
@@ -100,7 +109,11 @@ It must not contain:
 - `Employer Confidential`
 - `Secrets`
 
-Personal-private aliases, defaults, and skills may live in a deployment-defined private overlay that extends this catalog without copying public artifact bodies. Employer-confidential artifacts require an employer-approved canonical home; when no such home exists, they remain ephemeral or must be sanitized and explicitly reclassified before publication. Passwords, tokens, certificates, private keys, recovery codes, and comparable secrets do not belong in any registry.
+Personal Private aliases, defaults, and capability bodies belong in the private `grimoire-core` overlay, which may reference public artifacts by stable ID. Unpublished Professional Portfolio work may be staged there before deliberate sanitation and publication.
+
+Employer Confidential capabilities belong in an approved employer-controlled repository or knowledge system—not this public registry and not the personal private overlay. A sanitized reusable shell may be promoted only after company-specific identities, mappings, configurations, examples, screenshots, and operational details have been removed or generalized.
+
+Passwords, tokens, certificates, private keys, recovery codes, and comparable secret values should not be stored in any registry. Store only safe references to an approved secret-management mechanism.
 
 ## Design Principles
 
