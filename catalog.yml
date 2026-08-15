@@ -219,3 +219,51 @@ artifacts:
   aliases:
   - macro-template
   summary: Scaffold a compact named macro that expands into a stable prompt or skill invocation.
+- id: skill.meta.registry-curator
+  name: Grimoire Registry Curator
+  kind: skill
+  path: skills/registry-curator/SKILL.md
+  domain: meta
+  status: active
+  classification: Public
+  aliases:
+  - skill-curator
+  - registry-curator
+  - capability-curator
+  summary: Create, classify, version, and garden reusable prompts, skills, and macros across the public registry and private overlay.
+- id: macro.meta.create-macro
+  name: Create or Update a Macro
+  kind: macro
+  path: macros/create-macro.md
+  domain: meta
+  status: active
+  classification: Public
+  aliases:
+  - /macro
+  - make-macro
+  - store-as-macro
+  - make this a macro
+  summary: Turn current material into the smallest safely routed reusable capability, preferring a thin macro when appropriate.
+- id: macro.meta.prompt-engineer
+  name: Prompt Engineer
+  kind: macro
+  path: macros/prompt-engineer.md
+  domain: meta
+  status: active
+  classification: Public
+  aliases:
+  - /prompt-engineer
+  - act as a prompt engineer
+  summary: Apply the universal prompt engineer to the current request without executing the newly designed prompt by default.
+- id: macro.writing.preserve-voice
+  name: Preserve My Voice
+  kind: macro
+  path: macros/preserve-voice.md
+  domain: writing.rewriting
+  status: active
+  classification: Public
+  aliases:
+  - /voice
+  - make this sound like me
+  - keep my voice
+  summary: Conservatively revise current prose while preserving the writer's diction, rhythm, ambiguity, and emotional register.
