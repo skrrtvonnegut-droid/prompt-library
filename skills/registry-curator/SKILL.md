@@ -2,7 +2,7 @@
 
 ## Purpose
 
-Create, update, classify, deprecate, archive, and garden reusable prompts, skills, and macros without producing duplicate durable copies or crossing the Grimoire's data membrane.
+Create, update, classify, deprecate, archive, and garden reusable prompts, skills, and macros without producing duplicate durable copies or crossing the deployment's data membrane.
 
 This skill is the authoring counterpart to `skill.meta.registry-router`. The router finds and executes capabilities; the curator decides whether something should become a durable capability and maintains the canonical registry when it should.
 
@@ -14,7 +14,7 @@ Use this skill when the user asks to:
 - turn a successful conversation pattern into a named capability
 - add aliases or defaults to an existing artifact
 - update, rename, deprecate, supersede, archive, or garden a registry artifact
-- decide whether a capability belongs in the public registry or private overlay
+- decide whether a capability belongs in the public registry, a private overlay, or another approved system
 - reconcile duplicate, overlapping, stale, or weakly classified artifacts
 
 Do not create a durable artifact merely because a useful answer exists. Keep one-time work ephemeral unless reuse, provenance, consistency, or version history materially benefits it.
@@ -28,26 +28,27 @@ Do not create a durable artifact merely because a useful answer exists. Keep one
 - **Target artifact** — optional stable ID when creating a macro or updating an existing artifact.
 - **Classification** — optional; infer conservatively when omitted.
 - **Audience and scope** — optional intended users, domain, and operating context.
+- **Deployment context** — the authorized catalogs, repositories, classification policy, and canonical-home rules available to the current deployment.
 
 ## Dependencies
 
-- Read and authorized write access to `skrrtvonnegut-droid/prompt-library` for Public or intentionally sanitized Professional Portfolio artifacts.
-- Read and authorized write access to `skrrtvonnegut-droid/grimoire-core` for Personal Private aliases, defaults, and private capabilities.
-- The public catalog at `prompt-library/catalog.yml`.
-- The private overlay catalog at `grimoire-core/skills/catalog.yml` when available.
-- The relevant authoring template under `prompt-library/templates/`.
+- Read and authorized write access to the canonical public Prompt Library for Public or intentionally sanitized Professional Portfolio artifacts.
+- Optional read and authorized write access to a deployment-defined private overlay for Personal Private aliases, defaults, and capabilities.
+- The public `catalog.yml` and any authorized overlay catalog.
+- The relevant authoring template under `templates/`.
+- An employer-approved canonical system when the capability is Employer Confidential.
 
-This skill does not grant repository access by itself. When write access is unavailable, return a complete proposed change without claiming it was committed.
+This skill does not grant repository or system access by itself. When write access is unavailable, return a complete proposed change without claiming it was committed.
 
 ## Classification and Canonical Home
 
 - **Public** — may be stored in the public Prompt Library.
-- **Professional Portfolio** — may be stored publicly only after intentional sanitation and publication review.
-- **Personal Private** — belongs in the private `grimoire-core` overlay.
-- **Employer Confidential** — does not belong in either personal GitHub repository. Keep it in an approved employer-controlled system, or extract and sanitize only the reusable shell before considering another classification.
-- **Secrets** — never store secret values in either registry. Store only safe references to an approved secret-management mechanism.
+- **Professional Portfolio** — may be stored publicly only after intentional sanitation and publication review; a deployment may stage unpublished work in an authorized private overlay.
+- **Personal Private** — belongs only in an authorized secret-free private overlay.
+- **Employer Confidential** — belongs in an employer-approved canonical system, not an unrelated personal registry. A sanitized reusable shell may be considered for another classification only after deliberate review.
+- **Secrets** — never store secret values in any registry. Store only safe references to an approved secret-management mechanism.
 
-Classify the complete artifact, including examples, defaults, metadata, filenames, screenshots, and source material—not merely its abstract instruction body.
+Classify the complete artifact, including examples, defaults, metadata, filenames, screenshots, supporting files, and source material—not merely its abstract instruction body.
 
 ## Artifact Selection
 
@@ -67,7 +68,7 @@ Determine whether the user wants to create, update, invoke, inspect, alias, depr
 
 ### 2. Search before creating
 
-Load the current public catalog and, when authorized, the private overlay. Search by:
+Load the current public catalog and any authorized private overlay. Search by:
 
 1. exact stable ID
 2. aliases and names
@@ -81,8 +82,8 @@ Prefer updating, relating, or superseding an existing artifact over creating a n
 Classify the conversation outcome as:
 
 - **Ephemeral** — useful only in the current context
-- **Version** — reusable artifact belongs in GitHub
-- **Distill** — durable semantic insight belongs in Notion rather than a capability registry
+- **Version** — reusable artifact belongs in an approved versioned system
+- **Distill** — durable semantic insight belongs in the deployment's knowledge system rather than a capability registry
 - **Both** — a versioned capability and a related semantic record are both justified
 
 Do not preserve material merely because it exists.
@@ -103,7 +104,7 @@ macro.<domain>.<slug>
 
 Treat the stable ID as identity. Titles, aliases, and paths may evolve; the ID should not be recycled for unrelated behavior.
 
-Aliases must be unique case-insensitively across the combined registry. Prefer a short slash alias for frequently invoked macros and one or two natural-language aliases when useful.
+Aliases must be unique case-insensitively across the combined deployment registry. Prefer a short slash alias for frequently invoked macros and one or two natural-language aliases when useful.
 
 ### 6. Author the canonical source
 
@@ -119,7 +120,7 @@ For a macro, identify exactly one target prompt or skill. Macro-to-macro chains 
 
 ### 8. Validate and review
 
-Run the repository validator and inspect the diff for:
+Run the repository or deployment validator and inspect the diff for:
 
 - duplicate IDs, names, aliases, or paths
 - missing canonical files
@@ -133,7 +134,7 @@ Run the repository validator and inspect the diff for:
 
 Commit the source and catalog change together when practical. Use a message that describes the capability-level change rather than a vague file operation.
 
-When the architecture or canonical routing changes materially, update the Grimoire ADR, manifest, and Bridge Registry as part of the same body of work.
+When canonical routing or the registry architecture changes materially, update the deployment's architecture record, system manifest, bridge record, and project/runtime configuration as one body of work.
 
 ### 10. Report completion
 
@@ -163,14 +164,14 @@ Return the result, stable ID, aliases, classification, canonical path, target wh
 ## Version Record
 
 - Commit or pull request:
-- Related ADR or Bridge Registry update, when applicable:
+- Related architecture or bridge update, when applicable:
 ```
 
 ## Guardrails
 
 - Never publish Personal Private or Employer Confidential material.
 - Never store secret values.
-- Never claim a write succeeded without a successful repository action.
+- Never claim a write succeeded without a successful repository or system action.
 - Never create a second durable body when an existing canonical artifact can be referenced or updated.
 - Never let a memorable alias become a hidden fork of its target.
 - Preserve stable IDs through ordinary renames and moves.
@@ -179,8 +180,8 @@ Return the result, stable ID, aliases, classification, canonical path, target wh
 ## Failure Handling
 
 - **Ambiguous duplicate:** present the likely existing artifacts and avoid creation until the identity is resolved.
-- **Unsafe classification:** stop the public write and route to the correct approved home.
-- **Employer Confidential source:** keep the source in an employer-controlled system; produce only a sanitized reusable shell when that transformation is explicitly appropriate.
+- **Unsafe classification:** stop the write and route to the correct approved home.
+- **Employer Confidential source:** keep the source in an employer-approved system; produce only a sanitized reusable shell when that transformation is explicitly appropriate.
 - **Missing target:** do not create the macro; resolve or create the underlying prompt or skill first.
 - **Unavailable write access:** return a proposed artifact and catalog entry, clearly labeled as uncommitted.
 - **Validation failure:** do not merge or report completion; fix the catalog or source and validate again.
