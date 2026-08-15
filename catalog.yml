@@ -208,8 +208,11 @@ artifacts:
     classification: Public
     aliases:
       - /create-macro
+      - /macro
       - create-macro
       - macro-builder
+      - make this a macro
+      - store this as a macro
     summary: Turn a recurring instruction or conversation pattern into a safely routed and versioned registry capability.
   - id: macro.meta.list-skills
     name: List Skills
@@ -223,6 +226,29 @@ artifacts:
       - list-skills
       - browse-skills
     summary: Browse or filter the registry without loading full artifact bodies.
+  - id: macro.meta.prompt-engineer
+    name: Prompt Engineer
+    kind: macro
+    path: macros/prompt-engineer.md
+    domain: meta
+    status: active
+    classification: Public
+    aliases:
+      - /prompt-engineer
+      - act as a prompt engineer
+    summary: Apply the universal prompt engineer to the current request without executing the newly designed prompt by default.
+  - id: macro.writing.preserve-voice
+    name: Preserve My Voice
+    kind: macro
+    path: macros/preserve-voice.md
+    domain: writing.rewriting
+    status: active
+    classification: Public
+    aliases:
+      - /voice
+      - make this sound like me
+      - keep my voice
+    summary: Conservatively revise current prose while preserving the writer's diction, rhythm, ambiguity, and emotional register.
   - id: template.skill.standard
     name: Skill Authoring Template
     kind: template
