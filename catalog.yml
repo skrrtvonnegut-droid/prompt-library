@@ -187,6 +187,30 @@ artifacts:
       - registry-router
       - grimoire-router
     summary: Resolve a prompt, skill, or macro by stable ID, alias, or intent and execute its canonical artifact.
+  - id: skill.meta.registry-author
+    name: Grimoire Registry Author
+    kind: skill
+    path: skills/registry-author/SKILL.md
+    domain: meta
+    status: active
+    classification: Public
+    aliases:
+      - registry-author
+      - artifact-author
+      - prompt-library-author
+    summary: Classify, deduplicate, author, register, validate, and version a reusable Prompt Library artifact.
+  - id: macro.meta.create-macro
+    name: Create Macro
+    kind: macro
+    path: macros/create-macro.md
+    domain: meta
+    status: active
+    classification: Public
+    aliases:
+      - /create-macro
+      - create-macro
+      - macro-builder
+    summary: Turn a recurring instruction or conversation pattern into a safely routed and versioned registry capability.
   - id: macro.meta.list-skills
     name: List Skills
     kind: macro
