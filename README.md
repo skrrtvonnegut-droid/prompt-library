@@ -1,115 +1,116 @@
 # Prompt Library
 
-A public, versioned registry of reusable AI prompts, named macros, and composable skills for technical work, documentation, analysis, learning, writing, and creative exploration.
+A versioned registry of reusable prompts, skills, macros, and authoring templates for technical work, automation, documentation, analysis, learning, writing, and creative exploration.
 
-Most artifacts here began as something real that needed doing: turning rough notes into durable documentation, making dense technical material understandable to a particular audience, tracing decisions and risks, learning a tool, or getting an AI assistant to behave more like a thoughtful collaborator than a very confident autocomplete.
+Most artifacts here began as something that needed to work more than once: turn messy notes into usable documentation, explain a complex system without losing the important parts, create a repeatable workflow, or help an AI assistant behave more like a capable collaborator than a very confident autocomplete.
 
-This repository is not meant to become a heap of clever incantations. It is a small capability system: human-readable instructions, stable identities, explicit invocation names, lifecycle metadata, and Git history.
+The library is both human-readable and machine-discoverable. Markdown files contain the canonical instructions; `catalog.yml` provides stable identity, aliases, lifecycle, classification, and routing metadata.
 
-## The Three Layers
+## Artifact Types
 
-- **Prompt** — the canonical instruction text stored in Markdown.
-- **Macro** — a stable, human-friendly alias that invokes a prompt, such as `kb-writer` or `prompt-engineer`.
-- **Skill** — a larger capability contract that may include a prompt, supporting references, examples, scripts, or other resources.
+| Type | Use it for |
+| --- | --- |
+| **Prompt** | A reusable instruction set that runs against supplied inputs. |
+| **Skill** | A routed capability with a procedure, dependencies, guardrails, and an output contract. |
+| **Macro** | A short named command that expands into a prompt or skill invocation. |
+| **Template** | A scaffold for authoring a new registry artifact consistently. |
 
-A prompt can expose one or more macros without duplicating its content. The Markdown file remains canonical; `catalog.yml` tells agents how to find and invoke it.
+The distinction is about operational depth, not prestige. A good macro may be three lines. A good skill may coordinate several tools. Both should remain understandable by a human.
 
-## Invoking a Macro
+## Using the Registry
 
-Use an explicit invocation when you want deterministic behavior:
-
-```text
-Use macro: kb-writer
-Audience: non-technical plant managers
-Source material: [paste text or attach documents]
-```
+A compatible assistant can resolve artifacts by stable ID, alias, name, or intent.
 
 ```text
-Invoke prompt.work.documentation.raw-notes-to-sop with these notes:
-[paste notes]
+/skills documentation
+/skill kb-writer
+/prompt prompt.work.documentation.design-document
+Use the preserve-voice macro on this paragraph.
 ```
 
-```text
-Find a macro for turning a group-chat discussion into a cyber-risk decision record.
-```
+Resolution follows `catalog.yml`:
 
-Agents should resolve an exact artifact ID first, then an exact macro alias, and fetch the canonical Markdown file before applying it. The full retrieval and execution contract is defined in [`AGENTS.md`](AGENTS.md).
+1. Match an exact stable ID.
+2. Match a registered alias.
+3. Match the artifact name.
+4. Rank by intent using the artifact summary and domain.
+5. Fetch and execute the canonical Markdown file.
 
-## What You Will Find Here
+The repository is not automatically loaded into every AI conversation. The assistant must have access to the repository and retrieve the catalog and selected artifact at invocation time. Within the Living Grimoire, GitHub is the canonical source and ChatGPT is the orchestration layer.
 
-- **Technical and systems work** — Microsoft 365, identity, automation, administration, troubleshooting, and operational analysis.
-- **Governance and documentation** — structured records, registries, assessments, runbooks, SOPs, knowledge articles, and action plans.
-- **Prompt engineering** — reusable frameworks for turning rough intentions into clear instructions.
-- **Analysis and synthesis** — extracting themes, comparing evidence, surfacing risks, and tracking decisions.
-- **Learning** — tutor and learning-lab prompts designed to build understanding rather than merely produce answers.
-- **Writing and reflection** — journaling, rewriting, creative work, and nuanced inquiry.
+See [`docs/skill-system.md`](docs/skill-system.md) for the full contract.
 
 ## Repository Structure
 
 ```text
 prompt-library/
-├── AGENTS.md                 # Agent retrieval, execution, and safety contract
-├── catalog.yml               # Machine-readable registry and macro aliases
+├── catalog.yml                 # machine-readable registry
 ├── docs/
-│   ├── AUTHORING.md          # How to create, classify, and register artifacts
-│   └── SKILL-CONTRACT.md     # Prompt, macro, and skill specification
+│   └── skill-system.md         # routing and authoring contract
+├── macros/
+│   ├── README.md
+│   └── list-skills.md
 ├── schemas/
-│   └── catalog.schema.json   # Editor-readable catalog validation contract
+│   └── catalog.schema.json
+├── scripts/
+│   └── validate_catalog.py
+├── skills/
+│   ├── README.md
+│   └── registry-router/
+│       └── SKILL.md
 ├── templates/
-│   ├── macro-template.md     # Scaffold for a new single-file macro
+│   ├── skill/
+│   │   └── SKILL.md
+│   ├── macro.md
 │   └── universal-prompt-engineer.md
 ├── work/
-│   ├── documentation/
-│   ├── governance/
-│   ├── microsoft-365/
-│   └── reporting/
 ├── writing/
-│   ├── journaling/
-│   ├── rewriting/
-│   └── creative-writing/
 ├── learning/
 └── meta/
 ```
 
-## Catalog
+Existing prompt paths remain stable. The registry extends the repository without requiring a disruptive migration.
 
-`catalog.yml` is the machine-readable registry. Every published capability receives:
+## Adding a Prompt, Skill, or Macro
 
-- a stable artifact ID;
-- a canonical repository path;
-- a domain and concise summary;
-- one or more globally unique macro aliases;
-- lifecycle and classification metadata;
-- search tags.
+1. **Classify it first.** This repository is public. Only `Public` and intentionally sanitized `Professional Portfolio` artifacts belong here.
+2. **Search before creating.** Prefer improving, relating, or superseding an existing artifact over making a near-duplicate.
+3. **Choose the smallest useful type.** Use a macro for compact expansion, a prompt for one reusable instruction set, and a skill when routing, tools, dependencies, or failure handling matter.
+4. **Create the canonical Markdown file.** Start from the templates in `templates/`.
+5. **Register it in `catalog.yml`.** Give it a stable ID, aliases, summary, classification, domain, and lifecycle state.
+6. **Validate the catalog.** Run:
 
-The catalog describes and routes to artifacts; it does not copy their prompt text. `schemas/catalog.schema.json` defines the catalog shape for editors and automation.
+   ```bash
+   python -m pip install pyyaml
+   python scripts/validate_catalog.py
+   ```
+
+7. **Commit intentionally.** The stable ID should survive renames and moves whenever practical.
+
+## Data Membrane
+
+This public repository may contain:
+
+- `Public`
+- `Professional Portfolio`
+
+It must not contain:
+
+- `Personal Private`
+- `Employer Confidential`
+- `Secrets`
+
+Personal-private aliases, defaults, and skills may live in a deployment-defined private overlay that extends this catalog without copying public artifact bodies. Employer-confidential artifacts require an employer-approved canonical home; when no such home exists, they remain ephemeral or must be sanitized and explicitly reclassified before publication. Passwords, tokens, certificates, private keys, recovery codes, and comparable secrets do not belong in any registry.
 
 ## Design Principles
 
-- **One truth, many references** — prompt content has one canonical file; catalogs, aliases, and documentation point to it.
-- **Explicit activation by default** — named macros are easier to audit than invisible keyword magic.
-- **Outcome over theatrics** — useful context, constraints, and success criteria matter more than elaborate roleplay.
-- **Stable identity** — IDs and aliases should survive file moves and wording revisions.
-- **Visible uncertainty** — artifacts should surface gaps, assumptions, conflicting evidence, and unresolved questions.
-- **Public by construction** — this repository must not contain personal-private, employer-confidential, or secret material.
-
-## Public Boundary
-
-This repository is public. Only material classified **Public** or intentionally sanitized for a **Professional Portfolio** belongs here.
-
-Do not store passwords, tokens, certificates, private keys, recovery codes, personal-private context, employer-confidential details, proprietary source material, or prompts that depend on those details. Private or organization-specific capabilities belong in a private overlay that references this public foundation.
-
-## Adding a Macro
-
-Invoke the self-hosting authoring macro:
-
-```text
-Use macro: create-macro
-Source material: [rough request, conversation, or existing prompt]
-```
-
-Or start manually with [`templates/macro-template.md`](templates/macro-template.md), then follow [`docs/AUTHORING.md`](docs/AUTHORING.md). Before creating anything new, search the catalog for an existing capability that should be updated, related, or superseded instead.
+- **One truth, many references.** The Markdown artifact is canonical; catalogs and macros may point to it without copying its body.
+- **Stable identity over filenames.** Paths can change; artifact IDs should remain stable.
+- **Outcome over ceremony.** Structure should improve execution, not become paperwork for its own sake.
+- **Visible uncertainty.** Skills should surface missing inputs, conflicts, and limitations rather than quietly inventing certainty.
+- **Human-legible automation.** A person should be able to inspect, understand, and revise every artifact.
+- **Privacy before convenience.** A useful macro is not worth leaking the context that made it useful.
 
 ## Status
 
-This registry is built iteratively. Artifacts are reviewed before publication, especially when they originated in professional or personal work. Git history preserves how each capability evolves without requiring competing durable copies.
+The registry is active and evolves through normal version control. Catalog integrity is checked automatically on pushes and pull requests.

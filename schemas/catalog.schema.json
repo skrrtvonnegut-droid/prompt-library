@@ -1,14 +1,13 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://github.com/skrrtvonnegut-droid/prompt-library/blob/main/schemas/catalog.schema.json",
+  "$id": "https://github.com/skrrtvonnegut-droid/prompt-library/schemas/catalog.schema.json",
   "title": "Prompt Library Catalog",
+  "description": "Machine-readable registry for prompts, skills, macros, and templates.",
   "type": "object",
-  "additionalProperties": false,
   "required": [
     "schema_version",
     "repository",
-    "invocation",
-    "classification_policy",
+    "artifact_kinds",
     "artifacts"
   ],
   "properties": {
@@ -17,20 +16,23 @@
     },
     "repository": {
       "type": "object",
-      "additionalProperties": false,
       "required": [
         "artifact_id",
+        "name",
         "canonical_home",
         "classification",
-        "purpose",
-        "canonical_content",
-        "registry",
-        "agent_contract"
+        "contract",
+        "schema",
+        "invocation"
       ],
       "properties": {
         "artifact_id": {
           "type": "string",
-          "pattern": "^[a-z0-9]+(?:[.-][a-z0-9]+)*$"
+          "pattern": "^project\\.[a-z0-9][a-z0-9.-]*$"
+        },
+        "name": {
+          "type": "string",
+          "minLength": 1
         },
         "canonical_home": {
           "const": "github"
@@ -38,95 +40,88 @@
         "classification": {
           "const": "Public"
         },
-        "purpose": {
+        "contract": {
           "type": "string",
-          "minLength": 20
+          "pattern": "\\.md$"
         },
-        "canonical_content": {
-          "const": "markdown"
+        "schema": {
+          "type": "string",
+          "pattern": "\\.json$"
         },
-        "registry": {
-          "const": "catalog.yml"
+        "public_registry": {
+          "type": "boolean"
         },
-        "agent_contract": {
-          "const": "AGENTS.md"
+        "private_overlay": {
+          "type": "object",
+          "required": [
+            "repository",
+            "path"
+          ],
+          "properties": {
+            "repository": {
+              "type": "string",
+              "pattern": "^[^/]+/[^/]+$"
+            },
+            "path": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "additionalProperties": true
+        },
+        "invocation": {
+          "type": "object",
+          "required": [
+            "skill_prefix",
+            "prompt_prefix",
+            "macro_prefix",
+            "natural_language_resolution"
+          ],
+          "properties": {
+            "skill_prefix": {
+              "type": "string"
+            },
+            "prompt_prefix": {
+              "type": "string"
+            },
+            "macro_prefix": {
+              "type": "string"
+            },
+            "natural_language_resolution": {
+              "type": "boolean"
+            }
+          },
+          "additionalProperties": true
         }
-      }
+      },
+      "additionalProperties": true
     },
-    "invocation": {
+    "artifact_kinds": {
       "type": "object",
-      "additionalProperties": false,
       "required": [
-        "activation",
-        "patterns",
-        "resolution_order",
-        "ambiguity",
-        "missing_artifact"
+        "prompt",
+        "skill",
+        "macro",
+        "template"
       ],
       "properties": {
-        "activation": {
-          "enum": ["explicit", "suggested", "automatic"]
+        "prompt": {
+          "type": "string"
         },
-        "patterns": {
-          "type": "array",
-          "minItems": 1,
-          "uniqueItems": true,
-          "items": {
-            "type": "string",
-            "minLength": 3
-          }
+        "skill": {
+          "type": "string"
         },
-        "resolution_order": {
-          "type": "array",
-          "minItems": 1,
-          "uniqueItems": true,
-          "items": {
-            "enum": [
-              "artifact_id",
-              "macro_alias",
-              "canonical_path",
-              "unique_name_or_tag"
-            ]
-          }
+        "macro": {
+          "type": "string"
         },
-        "ambiguity": {
-          "enum": ["surface_candidates", "require_exact_match"]
-        },
-        "missing_artifact": {
-          "enum": ["report_and_do_not_invent"]
+        "template": {
+          "type": "string"
         }
-      }
-    },
-    "classification_policy": {
-      "type": "object",
-      "additionalProperties": false,
-      "required": ["allowed", "forbidden", "private_material"],
-      "properties": {
-        "allowed": {
-          "type": "array",
-          "minItems": 1,
-          "uniqueItems": true,
-          "items": {
-            "enum": ["Public", "Professional Portfolio"]
-          }
-        },
-        "forbidden": {
-          "type": "array",
-          "minItems": 1,
-          "uniqueItems": true,
-          "items": {
-            "enum": ["Personal Private", "Employer Confidential", "Secrets"]
-          }
-        },
-        "private_material": {
-          "type": "string",
-          "minLength": 20
-        }
-      }
+      },
+      "additionalProperties": false
     },
     "artifacts": {
       "type": "array",
-      "minItems": 1,
       "items": {
         "$ref": "#/$defs/artifact"
       }
@@ -135,83 +130,76 @@
   "$defs": {
     "artifact": {
       "type": "object",
-      "additionalProperties": false,
       "required": [
         "id",
-        "kind",
         "name",
+        "kind",
         "path",
         "domain",
-        "summary",
-        "macros",
-        "tags",
         "status",
-        "classification"
+        "classification",
+        "aliases",
+        "summary"
       ],
       "properties": {
         "id": {
           "type": "string",
-          "pattern": "^(prompt|skill)\\.[a-z0-9]+(?:[.-][a-z0-9]+)*$"
-        },
-        "kind": {
-          "enum": ["prompt", "skill"]
+          "pattern": "^(prompt|skill|macro|template)\\.[a-z0-9][a-z0-9.-]*$"
         },
         "name": {
           "type": "string",
-          "minLength": 3
+          "minLength": 1
+        },
+        "kind": {
+          "enum": [
+            "prompt",
+            "skill",
+            "macro",
+            "template"
+          ]
         },
         "path": {
           "type": "string",
-          "pattern": "^(?!/)(?!.*\\.\\./).+\\.md$"
+          "pattern": "^(?!/)(?!.*\\.\\.)[^\\\\]+$"
         },
         "domain": {
           "type": "string",
-          "pattern": "^[a-z0-9]+(?:[.-][a-z0-9]+)*$"
+          "pattern": "^[a-z0-9][a-z0-9.-]*$"
+        },
+        "status": {
+          "enum": [
+            "developing",
+            "active",
+            "review_due",
+            "superseded",
+            "archived"
+          ]
+        },
+        "classification": {
+          "enum": [
+            "Public",
+            "Professional Portfolio"
+          ]
+        },
+        "aliases": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true
         },
         "summary": {
           "type": "string",
-          "minLength": 20
+          "minLength": 12
         },
-        "macros": {
-          "type": "array",
-          "minItems": 1,
-          "uniqueItems": true,
-          "items": {
-            "type": "string",
-            "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
-          }
-        },
-        "tags": {
-          "type": "array",
-          "minItems": 1,
-          "uniqueItems": true,
-          "items": {
-            "type": "string",
-            "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
-          }
-        },
-        "status": {
-          "enum": ["draft", "active", "deprecated", "archived"]
-        },
-        "classification": {
-          "enum": ["Public", "Professional Portfolio"]
-        },
-        "replaced_by": {
+        "superseded_by": {
           "type": "string",
-          "pattern": "^(prompt|skill)\\.[a-z0-9]+(?:[.-][a-z0-9]+)*$"
-        },
-        "supersedes": {
-          "type": "array",
-          "uniqueItems": true,
-          "items": {
-            "type": "string",
-            "pattern": "^(prompt|skill)\\.[a-z0-9]+(?:[.-][a-z0-9]+)*$"
-          }
-        },
-        "notes": {
-          "type": "string"
+          "pattern": "^(prompt|skill|macro|template)\\.[a-z0-9][a-z0-9.-]*$"
         }
-      }
+      },
+      "additionalProperties": true
     }
-  }
+  },
+  "additionalProperties": false
 }
