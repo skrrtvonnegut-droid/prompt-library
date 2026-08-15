@@ -1,0 +1,62 @@
+schema_version: 1
+repository:
+  artifact_id: project.prompt-library
+  canonical_home: github
+  classification: public
+artifacts:
+  - id: prompt.learning.create-learning-lab
+    path: learning/create-a-learning-lab.md
+    domain: learning
+    status: active
+  - id: prompt.meta.prompt-library-archaeologist
+    path: meta/prompt-library-archaeologist.md
+    domain: meta
+    status: active
+  - id: prompt.template.universal-prompt-engineer
+    path: templates/universal-prompt-engineer.md
+    domain: templates
+    status: active
+  - id: prompt.work.documentation.kb-writer
+    path: work/documentation/audience-aware-internal-kb-writer.md
+    domain: work.documentation
+    status: active
+  - id: prompt.work.documentation.cyber-risk-decision-action-record
+    path: work/documentation/cyber-risk-decision-action-record.md
+    domain: work.documentation
+    status: active
+  - id: prompt.work.documentation.break-fix-runbook
+    path: work/documentation/itil-aligned-break-fix-runbook-builder.md
+    domain: work.documentation
+    status: active
+  - id: prompt.work.documentation.design-document
+    path: work/documentation/itil-aligned-design-document-builder.md
+    domain: work.documentation
+    status: active
+  - id: prompt.work.documentation.raw-notes-to-sop
+    path: work/documentation/raw-notes-to-sop.md
+    domain: work.documentation
+    status: active
+  - id: prompt.work.governance.contractor-registry
+    path: work/governance/contractor-registry-builder.md
+    domain: work.governance
+    status: active
+  - id: prompt.work.microsoft-365.tenant-health-digest
+    path: work/microsoft-365/m365-tenant-health-digest.md
+    domain: work.microsoft-365
+    status: active
+  - id: prompt.work.reporting.weekly-1on1-prep
+    path: work/reporting/weekly-1on1-prep.md
+    domain: work.reporting
+    status: active
+  - id: prompt.writing.creative.iterative-story-workshop
+    path: writing/creative-writing/iterative-story-workshop.md
+    domain: writing.creative
+    status: active
+  - id: prompt.writing.journaling.journal-pattern-mirror
+    path: writing/journaling/journal-pattern-mirror.md
+    domain: writing.journaling
+    status: active
+  - id: prompt.writing.rewriting.preserve-my-voice
+    path: writing/rewriting/preserve-my-voice-rewriter.md
+    domain: writing.rewriting
+    status: active
