@@ -34,6 +34,7 @@ In other words: less **"say the secret words and hope"**, more **"design a small
 
 ```text
 prompt-library/
+├── catalog.yml
 ├── templates/
 ├── work/
 │   ├── documentation/
@@ -50,7 +51,9 @@ prompt-library/
 
 ## Catalog
 
-Prompts will be added here after review.
+`catalog.yml` is the machine-readable index for the library. Each published prompt receives a stable artifact ID, repository path, domain, and lifecycle state so the collection can be referenced reliably by other tools and knowledge systems without using filenames as identity.
+
+The prompt Markdown files remain the canonical content. The catalog describes them; it does not duplicate them.
 
 ## Status
 
