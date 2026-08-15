@@ -75,7 +75,7 @@ Existing prompt paths remain stable. The registry extends the repository without
 
 1. **Classify it first.** This repository is public. Only `Public` and intentionally sanitized `Professional Portfolio` artifacts belong here.
 2. **Search before creating.** Prefer improving, relating, or superseding an existing artifact over making a near-duplicate.
-3. **Choose the smallest useful type.** Use a macro for a compact expansion, a prompt for a reusable instruction set, and a skill when routing, tools, dependencies, or failure handling matter.
+3. **Choose the smallest useful type.** Use a macro for compact expansion, a prompt for one reusable instruction set, and a skill when routing, tools, dependencies, or failure handling matter.
 4. **Create the canonical Markdown file.** Start from the templates in `templates/`.
 5. **Register it in `catalog.yml`.** Give it a stable ID, aliases, summary, classification, domain, and lifecycle state.
 6. **Validate the catalog.** Run:
@@ -100,7 +100,7 @@ It must not contain:
 - `Employer Confidential`
 - `Secrets`
 
-Private or employer-confidential macros belong in the private `grimoire-core` overlay and may reference public artifacts by stable ID. Passwords, tokens, certificates, private keys, recovery codes, and comparable secrets should not be stored in either registry.
+Personal-private aliases, defaults, and skills may live in a deployment-defined private overlay that extends this catalog without copying public artifact bodies. Employer-confidential artifacts require an employer-approved canonical home; when no such home exists, they remain ephemeral or must be sanitized and explicitly reclassified before publication. Passwords, tokens, certificates, private keys, recovery codes, and comparable secrets do not belong in any registry.
 
 ## Design Principles
 

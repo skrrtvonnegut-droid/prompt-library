@@ -7,9 +7,9 @@ repository:
   contract: docs/skill-system.md
   schema: schemas/catalog.schema.json
   public_registry: true
-  private_overlay:
-    repository: skrrtvonnegut-droid/grimoire-core
-    path: skills/catalog.yml
+  overlay_contract:
+    discovery: deployment-defined
+    mode: catalog-extension
   invocation:
     skill_prefix: /skill
     prompt_prefix: /prompt
@@ -21,201 +21,201 @@ artifact_kinds:
   macro: A compact named command that expands into a prompt or skill invocation.
   template: A scaffold for authoring a new registry artifact.
 artifacts:
-- id: prompt.learning.create-learning-lab
-  name: Create a Learning Lab
-  kind: prompt
-  path: learning/create-a-learning-lab.md
-  domain: learning
-  status: active
-  classification: Public
-  aliases:
-  - learning-lab
-  - create-learning-lab
-  summary: Create an ongoing, adaptive learning space for a topic, tool, or practice.
-- id: prompt.meta.prompt-library-archaeologist
-  name: Prompt Library Archaeologist
-  kind: prompt
-  path: meta/prompt-library-archaeologist.md
-  domain: meta
-  status: active
-  classification: Public
-  aliases:
-  - prompt-archaeologist
-  - library-archaeologist
-  summary: Audit a prompt collection for duplicates, gaps, drift, and consolidation opportunities.
-- id: prompt.template.universal-prompt-engineer
-  name: Universal Prompt Engineer
-  kind: prompt
-  path: templates/universal-prompt-engineer.md
-  domain: templates
-  status: active
-  classification: Public
-  aliases:
-  - prompt-engineer
-  - build-a-prompt
-  summary: Turn a rough request into a reusable, outcome-focused prompt.
-- id: prompt.work.documentation.kb-writer
-  name: Audience-Aware Internal KB Writer
-  kind: prompt
-  path: work/documentation/audience-aware-internal-kb-writer.md
-  domain: work.documentation
-  status: active
-  classification: Professional Portfolio
-  aliases:
-  - kb-writer
-  - knowledge-base-writer
-  summary: Translate dense technical source material into an audience-appropriate explanatory knowledge-base article.
-- id: prompt.work.documentation.cyber-risk-decision-action-record
-  name: Cyber Risk Decision & Action Record
-  kind: prompt
-  path: work/documentation/cyber-risk-decision-action-record.md
-  domain: work.documentation
-  status: active
-  classification: Professional Portfolio
-  aliases:
-  - cyber-risk-record
-  - risk-decision-record
-  summary: Extract cyber-risk decisions, alignment, owners, and open actions from a conversation.
-- id: prompt.work.documentation.break-fix-runbook
-  name: ITIL-Aligned Break/Fix Runbook Builder
-  kind: prompt
-  path: work/documentation/itil-aligned-break-fix-runbook-builder.md
-  domain: work.documentation
-  status: active
-  classification: Professional Portfolio
-  aliases:
-  - runbook-builder
-  - break-fix-runbook
-  summary: Convert incident or break/fix notes into a repeatable operational runbook.
-- id: prompt.work.documentation.design-document
-  name: ITIL-Aligned Design Document Builder
-  kind: prompt
-  path: work/documentation/itil-aligned-design-document-builder.md
-  domain: work.documentation
-  status: active
-  classification: Professional Portfolio
-  aliases:
-  - design-doc
-  - design-document
-  summary: Turn technical requirements and notes into an ITIL-aware design document.
-- id: prompt.work.documentation.raw-notes-to-sop
-  name: Raw Notes to SOP
-  kind: prompt
-  path: work/documentation/raw-notes-to-sop.md
-  domain: work.documentation
-  status: active
-  classification: Professional Portfolio
-  aliases:
-  - sop-builder
-  - notes-to-sop
-  summary: Convert rough notes into a clear, governed standard operating procedure.
-- id: prompt.work.governance.contractor-registry
-  name: Contractor Registry Builder
-  kind: prompt
-  path: work/governance/contractor-registry-builder.md
-  domain: work.governance
-  status: active
-  classification: Professional Portfolio
-  aliases:
-  - contractor-registry
-  - contractor-register
-  summary: Transform contractor exports into a governance-ready access and review registry.
-- id: prompt.work.microsoft-365.tenant-health-digest
-  name: Microsoft 365 Tenant Health Digest
-  kind: prompt
-  path: work/microsoft-365/m365-tenant-health-digest.md
-  domain: work.microsoft-365
-  status: active
-  classification: Professional Portfolio
-  aliases:
-  - m365-health-digest
-  - tenant-health-digest
-  summary: Synthesize operational checks into a concise Microsoft 365 tenant-health briefing.
-- id: prompt.work.reporting.weekly-1on1-prep
-  name: Weekly 1:1 Preparation
-  kind: prompt
-  path: work/reporting/weekly-1on1-prep.md
-  domain: work.reporting
-  status: active
-  classification: Professional Portfolio
-  aliases:
-  - weekly-1on1
-  - one-on-one-prep
-  summary: Turn daily updates into an outcome-focused weekly one-on-one agenda.
-- id: prompt.writing.creative.iterative-story-workshop
-  name: Iterative Story Workshop
-  kind: prompt
-  path: writing/creative-writing/iterative-story-workshop.md
-  domain: writing.creative
-  status: active
-  classification: Public
-  aliases:
-  - story-workshop
-  - iterative-story
-  summary: Develop a story section by section while preserving voice and intentional revision.
-- id: prompt.writing.journaling.journal-pattern-mirror
-  name: Journal Pattern Mirror
-  kind: prompt
-  path: writing/journaling/journal-pattern-mirror.md
-  domain: writing.journaling
-  status: active
-  classification: Public
-  aliases:
-  - journal-mirror
-  - pattern-mirror
-  summary: Identify recurring themes and tensions across journal entries without flattening ambiguity.
-- id: prompt.writing.rewriting.preserve-my-voice
-  name: Preserve My Voice Rewriter
-  kind: prompt
-  path: writing/rewriting/preserve-my-voice-rewriter.md
-  domain: writing.rewriting
-  status: active
-  classification: Public
-  aliases:
-  - preserve-voice
-  - voice-rewriter
-  summary: Improve clarity and flow while retaining the writer's diction, rhythm, and emotional register.
-- id: skill.meta.registry-router
-  name: Grimoire Registry Router
-  kind: skill
-  path: skills/registry-router/SKILL.md
-  domain: meta
-  status: active
-  classification: Public
-  aliases:
-  - skill-router
-  - registry-router
-  - grimoire-router
-  summary: Resolve a prompt, skill, or macro by stable ID, alias, or intent and execute its canonical artifact.
-- id: macro.meta.list-skills
-  name: List Skills
-  kind: macro
-  path: macros/list-skills.md
-  domain: meta
-  status: active
-  classification: Public
-  aliases:
-  - /skills
-  - list-skills
-  - browse-skills
-  summary: Browse or filter the registry without loading full artifact bodies.
-- id: template.skill.standard
-  name: Skill Authoring Template
-  kind: template
-  path: templates/skill/SKILL.md
-  domain: templates
-  status: active
-  classification: Public
-  aliases:
-  - skill-template
-  summary: Scaffold a routed skill with explicit inputs, dependencies, guardrails, and output contract.
-- id: template.macro.standard
-  name: Macro Authoring Template
-  kind: template
-  path: templates/macro.md
-  domain: templates
-  status: active
-  classification: Public
-  aliases:
-  - macro-template
-  summary: Scaffold a compact named macro that expands into a stable prompt or skill invocation.
+  - id: prompt.learning.create-learning-lab
+    name: Create a Learning Lab
+    kind: prompt
+    path: learning/create-a-learning-lab.md
+    domain: learning
+    status: active
+    classification: Public
+    aliases:
+      - learning-lab
+      - create-learning-lab
+    summary: Create an ongoing, adaptive learning space for a topic, tool, or practice.
+  - id: prompt.meta.prompt-library-archaeologist
+    name: Prompt Library Archaeologist
+    kind: prompt
+    path: meta/prompt-library-archaeologist.md
+    domain: meta
+    status: active
+    classification: Public
+    aliases:
+      - prompt-archaeologist
+      - library-archaeologist
+    summary: Audit a prompt collection for duplicates, gaps, drift, and consolidation opportunities.
+  - id: prompt.template.universal-prompt-engineer
+    name: Universal Prompt Engineer
+    kind: prompt
+    path: templates/universal-prompt-engineer.md
+    domain: templates
+    status: active
+    classification: Public
+    aliases:
+      - prompt-engineer
+      - build-a-prompt
+    summary: Turn a rough request into a reusable, outcome-focused prompt.
+  - id: prompt.work.documentation.kb-writer
+    name: Audience-Aware Internal KB Writer
+    kind: prompt
+    path: work/documentation/audience-aware-internal-kb-writer.md
+    domain: work.documentation
+    status: active
+    classification: Professional Portfolio
+    aliases:
+      - kb-writer
+      - knowledge-base-writer
+    summary: Translate dense technical source material into an audience-appropriate explanatory knowledge-base article.
+  - id: prompt.work.documentation.cyber-risk-decision-action-record
+    name: Cyber Risk Decision & Action Record
+    kind: prompt
+    path: work/documentation/cyber-risk-decision-action-record.md
+    domain: work.documentation
+    status: active
+    classification: Professional Portfolio
+    aliases:
+      - cyber-risk-record
+      - risk-decision-record
+    summary: Extract cyber-risk decisions, alignment, owners, and open actions from a conversation.
+  - id: prompt.work.documentation.break-fix-runbook
+    name: ITIL-Aligned Break/Fix Runbook Builder
+    kind: prompt
+    path: work/documentation/itil-aligned-break-fix-runbook-builder.md
+    domain: work.documentation
+    status: active
+    classification: Professional Portfolio
+    aliases:
+      - runbook-builder
+      - break-fix-runbook
+    summary: Convert incident or break/fix notes into a repeatable operational runbook.
+  - id: prompt.work.documentation.design-document
+    name: ITIL-Aligned Design Document Builder
+    kind: prompt
+    path: work/documentation/itil-aligned-design-document-builder.md
+    domain: work.documentation
+    status: active
+    classification: Professional Portfolio
+    aliases:
+      - design-doc
+      - design-document
+    summary: Turn technical requirements and notes into an ITIL-aware design document.
+  - id: prompt.work.documentation.raw-notes-to-sop
+    name: Raw Notes to SOP
+    kind: prompt
+    path: work/documentation/raw-notes-to-sop.md
+    domain: work.documentation
+    status: active
+    classification: Professional Portfolio
+    aliases:
+      - sop-builder
+      - notes-to-sop
+    summary: Convert rough notes into a clear, governed standard operating procedure.
+  - id: prompt.work.governance.contractor-registry
+    name: Contractor Registry Builder
+    kind: prompt
+    path: work/governance/contractor-registry-builder.md
+    domain: work.governance
+    status: active
+    classification: Professional Portfolio
+    aliases:
+      - contractor-registry
+      - contractor-register
+    summary: Transform contractor exports into a governance-ready access and review registry.
+  - id: prompt.work.microsoft-365.tenant-health-digest
+    name: Microsoft 365 Tenant Health Digest
+    kind: prompt
+    path: work/microsoft-365/m365-tenant-health-digest.md
+    domain: work.microsoft-365
+    status: active
+    classification: Professional Portfolio
+    aliases:
+      - m365-health-digest
+      - tenant-health-digest
+    summary: Synthesize operational checks into a concise Microsoft 365 tenant-health briefing.
+  - id: prompt.work.reporting.weekly-1on1-prep
+    name: Weekly 1:1 Preparation
+    kind: prompt
+    path: work/reporting/weekly-1on1-prep.md
+    domain: work.reporting
+    status: active
+    classification: Professional Portfolio
+    aliases:
+      - weekly-1on1
+      - one-on-one-prep
+    summary: Turn daily updates into an outcome-focused weekly one-on-one agenda.
+  - id: prompt.writing.creative.iterative-story-workshop
+    name: Iterative Story Workshop
+    kind: prompt
+    path: writing/creative-writing/iterative-story-workshop.md
+    domain: writing.creative
+    status: active
+    classification: Public
+    aliases:
+      - story-workshop
+      - iterative-story
+    summary: Develop a story section by section while preserving voice and intentional revision.
+  - id: prompt.writing.journaling.journal-pattern-mirror
+    name: Journal Pattern Mirror
+    kind: prompt
+    path: writing/journaling/journal-pattern-mirror.md
+    domain: writing.journaling
+    status: active
+    classification: Public
+    aliases:
+      - journal-mirror
+      - pattern-mirror
+    summary: Identify recurring themes and tensions across journal entries without flattening ambiguity.
+  - id: prompt.writing.rewriting.preserve-my-voice
+    name: Preserve My Voice Rewriter
+    kind: prompt
+    path: writing/rewriting/preserve-my-voice-rewriter.md
+    domain: writing.rewriting
+    status: active
+    classification: Public
+    aliases:
+      - preserve-voice
+      - voice-rewriter
+    summary: Improve clarity and flow while retaining the writer's diction, rhythm, and emotional register.
+  - id: skill.meta.registry-router
+    name: Grimoire Registry Router
+    kind: skill
+    path: skills/registry-router/SKILL.md
+    domain: meta
+    status: active
+    classification: Public
+    aliases:
+      - skill-router
+      - registry-router
+      - grimoire-router
+    summary: Resolve a prompt, skill, or macro by stable ID, alias, or intent and execute its canonical artifact.
+  - id: macro.meta.list-skills
+    name: List Skills
+    kind: macro
+    path: macros/list-skills.md
+    domain: meta
+    status: active
+    classification: Public
+    aliases:
+      - /skills
+      - list-skills
+      - browse-skills
+    summary: Browse or filter the registry without loading full artifact bodies.
+  - id: template.skill.standard
+    name: Skill Authoring Template
+    kind: template
+    path: templates/skill/SKILL.md
+    domain: templates
+    status: active
+    classification: Public
+    aliases:
+      - skill-template
+    summary: Scaffold a routed skill with explicit inputs, dependencies, guardrails, and output contract.
+  - id: template.macro.standard
+    name: Macro Authoring Template
+    kind: template
+    path: templates/macro.md
+    domain: templates
+    status: active
+    classification: Public
+    aliases:
+      - macro-template
+    summary: Scaffold a compact named macro that expands into a stable prompt or skill invocation.
