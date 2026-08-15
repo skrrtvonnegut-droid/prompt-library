@@ -94,7 +94,7 @@ Existing prompt paths remain stable. The registry extends the repository without
 
 7. **Commit intentionally.** The stable ID should survive renames and moves whenever practical.
 
-Inside the Living Grimoire, `/macro` or the phrase **Make this a macro** invokes `skill.meta.registry-curator`, which performs the duplicate search, type selection, classification, authoring, catalog update, and validation workflow.
+Inside the Living Grimoire, `/macro` or the phrase **Make this a macro** invokes `skill.meta.registry-curator`, which performs duplicate search, type selection, classification, authoring, catalog update, and validation.
 
 ## Data Membrane
 
@@ -109,9 +109,9 @@ It must not contain:
 - `Employer Confidential`
 - `Secrets`
 
-Personal Private aliases, defaults, and capability bodies belong in the private `grimoire-core` overlay, which may reference public artifacts by stable ID. Unpublished Professional Portfolio work may be staged there before deliberate sanitation and publication.
+A deployment may provide a secret-free private overlay for Personal Private aliases, defaults, and capability bodies. The overlay may reference public artifacts by stable ID, but it must not copy public bodies merely to customize them. This public registry defines the overlay contract without publishing or hard-coding a deployment's private topology.
 
-Employer Confidential capabilities belong in an approved employer-controlled repository or knowledge system—not this public registry and not the personal private overlay. A sanitized reusable shell may be promoted only after company-specific identities, mappings, configurations, examples, screenshots, and operational details have been removed or generalized.
+Employer Confidential capabilities belong in an approved employer-controlled repository or knowledge system—not this public registry and not an unrelated personal overlay. A sanitized reusable shell may be promoted only after company-specific identities, mappings, configurations, examples, screenshots, and operational details have been removed or generalized.
 
 Passwords, tokens, certificates, private keys, recovery codes, and comparable secret values should not be stored in any registry. Store only safe references to an approved secret-management mechanism.
 
