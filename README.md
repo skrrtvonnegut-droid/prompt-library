@@ -1,60 +1,116 @@
 # Prompt Library
 
-A curated library of reusable prompts for technical work, automation, documentation, analysis, learning, writing, and creative exploration.
+A versioned registry of reusable prompts, skills, macros, and authoring templates for technical work, automation, documentation, analysis, learning, writing, and creative exploration.
 
-Most of the prompts here started as something I actually needed to do: turn messy notes into usable documentation, analyze a problem without losing the nuance, build a repeatable workflow, learn a new tool, or get an AI model to behave more like a thoughtful collaborator than a very confident autocomplete.
+Most artifacts here began as something that needed to work more than once: turn messy notes into usable documentation, explain a complex system without losing the important parts, create a repeatable workflow, or help an AI assistant behave more like a capable collaborator than a very confident autocomplete.
 
-## What You'll Find Here
+The library is both human-readable and machine-discoverable. Markdown files contain the canonical instructions; `catalog.yml` provides stable identity, aliases, lifecycle, classification, and routing metadata.
 
-This library tends to orbit a few recurring themes:
+## Artifact Types
 
-- **Technical and systems work** — prompts for Microsoft 365, identity, automation, administration, troubleshooting, and operational analysis.
-- **Governance and documentation** — turning conversations, exports, processes, and rough notes into structured records, registries, assessments, and action plans.
-- **Prompt engineering** — reusable frameworks for getting clearer, more consistent, and more useful results from AI tools.
-- **Analysis and synthesis** — prompts for extracting themes, comparing information, surfacing risks, tracking decisions, and making complex material easier to work with.
-- **Learning** — tutor, study-companion, and exploratory prompts designed to build understanding rather than just produce answers.
-- **Writing and reflection** — prompts for journaling, rewriting, creative work, and thinking through ideas without sanding off all the interesting edges.
+| Type | Use it for |
+| --- | --- |
+| **Prompt** | A reusable instruction set that runs against supplied inputs. |
+| **Skill** | A routed capability with a procedure, dependencies, guardrails, and an output contract. |
+| **Macro** | A short named command that expands into a prompt or skill invocation. |
+| **Template** | A scaffold for authoring a new registry artifact consistently. |
 
-## How I Tend to Build Prompts
+The distinction is about operational depth, not prestige. A good macro may be three lines. A good skill may coordinate several tools. Both should remain understandable by a human.
 
-I generally prefer prompts that are **specific about the outcome but flexible about the path**. Good prompts should give the model enough context, constraints, and structure to do useful work without trying to script every sentence it produces.
+## Using the Registry
 
-A lot of these prompts are built around a few principles:
+A compatible assistant can resolve artifacts by stable ID, alias, name, or intent.
 
-- Make the desired outcome explicit.
-- Give the model a useful role or point of view when it improves the work.
-- Separate source material from instructions.
-- Define what should be extracted, analyzed, or produced.
-- Ask for assumptions, uncertainty, risks, and unresolved questions to be surfaced rather than quietly invented away.
-- Prefer reusable frameworks over one-off magic incantations.
+```text
+/skills documentation
+/skill kb-writer
+/prompt prompt.work.documentation.design-document
+Use the preserve-voice macro on this paragraph.
+```
 
-In other words: less **"say the secret words and hope"**, more **"design a small system for thinking."**
+Resolution follows `catalog.yml`:
+
+1. Match an exact stable ID.
+2. Match a registered alias.
+3. Match the artifact name.
+4. Rank by intent using the artifact summary and domain.
+5. Fetch and execute the canonical Markdown file.
+
+The repository is not automatically loaded into every AI conversation. The assistant must have access to the repository and retrieve the catalog and selected artifact at invocation time. Within the Living Grimoire, GitHub is the canonical source and ChatGPT is the orchestration layer.
+
+See [`docs/skill-system.md`](docs/skill-system.md) for the full contract.
 
 ## Repository Structure
 
 ```text
 prompt-library/
-├── catalog.yml
+├── catalog.yml                 # machine-readable registry
+├── docs/
+│   └── skill-system.md         # routing and authoring contract
+├── macros/
+│   ├── README.md
+│   └── list-skills.md
+├── schemas/
+│   └── catalog.schema.json
+├── scripts/
+│   └── validate_catalog.py
+├── skills/
+│   ├── README.md
+│   └── registry-router/
+│       └── SKILL.md
 ├── templates/
+│   ├── skill/
+│   │   └── SKILL.md
+│   ├── macro.md
+│   └── universal-prompt-engineer.md
 ├── work/
-│   ├── documentation/
-│   ├── governance/
-│   ├── microsoft-365/
-│   └── reporting/
 ├── writing/
-│   ├── journaling/
-│   ├── rewriting/
-│   └── creative-writing/
 ├── learning/
 └── meta/
 ```
 
-## Catalog
+Existing prompt paths remain stable. The registry extends the repository without requiring a disruptive migration.
 
-`catalog.yml` is the machine-readable index for the library. Each published prompt receives a stable artifact ID, repository path, domain, and lifecycle state so the collection can be referenced reliably by other tools and knowledge systems without using filenames as identity.
+## Adding a Prompt, Skill, or Macro
 
-The prompt Markdown files remain the canonical content. The catalog describes them; it does not duplicate them.
+1. **Classify it first.** This repository is public. Only `Public` and intentionally sanitized `Professional Portfolio` artifacts belong here.
+2. **Search before creating.** Prefer improving, relating, or superseding an existing artifact over making a near-duplicate.
+3. **Choose the smallest useful type.** Use a macro for a compact expansion, a prompt for a reusable instruction set, and a skill when routing, tools, dependencies, or failure handling matter.
+4. **Create the canonical Markdown file.** Start from the templates in `templates/`.
+5. **Register it in `catalog.yml`.** Give it a stable ID, aliases, summary, classification, domain, and lifecycle state.
+6. **Validate the catalog.** Run:
+
+   ```bash
+   python -m pip install pyyaml
+   python scripts/validate_catalog.py
+   ```
+
+7. **Commit intentionally.** The stable ID should survive renames and moves whenever practical.
+
+## Data Membrane
+
+This public repository may contain:
+
+- `Public`
+- `Professional Portfolio`
+
+It must not contain:
+
+- `Personal Private`
+- `Employer Confidential`
+- `Secrets`
+
+Private or employer-confidential macros belong in the private `grimoire-core` overlay and may reference public artifacts by stable ID. Passwords, tokens, certificates, private keys, recovery codes, and comparable secrets should not be stored in either registry.
+
+## Design Principles
+
+- **One truth, many references.** The Markdown artifact is canonical; catalogs and macros may point to it without copying its body.
+- **Stable identity over filenames.** Paths can change; artifact IDs should remain stable.
+- **Outcome over ceremony.** Structure should improve execution, not become paperwork for its own sake.
+- **Visible uncertainty.** Skills should surface missing inputs, conflicts, and limitations rather than quietly inventing certainty.
+- **Human-legible automation.** A person should be able to inspect, understand, and revise every artifact.
+- **Privacy before convenience.** A useful macro is not worth leaking the context that made it useful.
 
 ## Status
 
-This repository is being built iteratively. Prompt content is reviewed before publication, especially when a prompt began life in a work or personal context.
+The registry is active and evolves through normal version control. Catalog integrity is checked automatically on pushes and pull requests.
