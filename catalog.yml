@@ -211,6 +211,18 @@ artifacts:
       - artifact-author
       - prompt-library-author
     summary: Classify, deduplicate, author, register, validate, and version a reusable Prompt Library artifact.
+  - id: skill.learning.chess-lab
+    name: Chess Learning Lab
+    kind: skill
+    path: skills/chess-learning-lab/SKILL.md
+    domain: learning.chess
+    status: active
+    classification: Public
+    aliases:
+      - chess-lab
+      - chess-learning-lab
+      - chess-coach-workflow
+    summary: Capture, analyze, batch-review, distill, migrate, journal, and creatively adapt chess games while maintaining a coherent learning system.
   - id: macro.meta.create-macro
     name: Create Macro
     kind: macro
@@ -261,6 +273,101 @@ artifacts:
       - make this sound like me
       - keep my voice
     summary: Conservatively revise current prose while preserving the writer's diction, rhythm, ambiguity, and emotional register.
+  - id: macro.learning.chess-capture
+    name: Chess Capture
+    kind: macro
+    path: macros/chess-capture.md
+    domain: learning.chess
+    status: active
+    classification: Public
+    aliases:
+      - /chess-capture
+      - /chess-game
+      - capture this chess game
+    summary: Capture one chess game, preserve its PGN, and produce a concise learning analysis without overfitting the living playbook.
+  - id: macro.learning.chess-batch
+    name: Chess Batch
+    kind: macro
+    path: macros/chess-batch.md
+    domain: learning.chess
+    status: active
+    classification: Public
+    aliases:
+      - /chess-batch
+      - start a chess batch
+    summary: Collect several PGNs without per-game interruption, then synthesize cross-game trends when the batch is explicitly completed.
+  - id: macro.learning.chess-distill
+    name: Chess Distill
+    kind: macro
+    path: macros/chess-distill.md
+    domain: learning.chess
+    status: active
+    classification: Public
+    aliases:
+      - /chess-distill
+      - distill these chess games
+      - distill this chess lesson
+    summary: Promote repeated chess-learning insights into the appropriate synthesis or living playbook layer while preserving raw evidence.
+  - id: macro.learning.chess-review
+    name: Chess Review
+    kind: macro
+    path: macros/chess-review.md
+    domain: learning.chess
+    status: active
+    classification: Public
+    aliases:
+      - /chess-review
+      - review my chess progress
+      - chess trend review
+    summary: Review a meaningful game sample for improving patterns, persistent risks, emerging strengths, and the next lightweight training block.
+  - id: macro.learning.chess-legend
+    name: Chess Legend
+    kind: macro
+    path: macros/chess-legend.md
+    domain: learning.chess
+    status: active
+    classification: Public
+    aliases:
+      - /chess-legend
+      - dramatize this chess game
+      - turn this game into a legend
+    summary: Transform a source game into a linked literary adaptation while keeping creative myth separate from technical analysis.
+  - id: macro.learning.chess-journal
+    name: Chess Journal
+    kind: macro
+    path: macros/chess-journal.md
+    domain: learning.chess
+    status: active
+    classification: Public
+    aliases:
+      - /chess-journal
+      - journal this chess game
+      - summarize this chess session for my journal
+    summary: Turn a game or session into a concise first-person journal reflection focused on experience and learning.
+  - id: macro.learning.chess-engine-check
+    name: Chess Engine Check
+    kind: macro
+    path: macros/chess-engine-check.md
+    domain: learning.chess
+    status: active
+    classification: Public
+    aliases:
+      - /chess-engine-check
+      - engine check this game
+      - verify this chess analysis with an engine
+    summary: Verify a chess analysis against a real engine or trusted engine output without simulating Stockfish or overstating certainty.
+  - id: macro.learning.chess-migrate
+    name: Chess Migrate
+    kind: macro
+    path: macros/chess-migrate.md
+    domain: learning.chess
+    status: active
+    classification: Public
+    aliases:
+      - /chess-migrate
+      - migrate this chess archive
+      - migrate this chess chat
+    summary: Convert a historical chess archive into structured game evidence, syntheses, living guidance, and linked creative adaptations.
   - id: template.skill.standard
     name: Skill Authoring Template
     kind: template
