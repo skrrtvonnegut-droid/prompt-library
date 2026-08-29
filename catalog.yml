@@ -223,6 +223,20 @@ artifacts:
       - chess-learning-lab
       - chess-coach-workflow
     summary: Capture, analyze, batch-review, distill, migrate, journal, and creatively adapt chess games while maintaining a coherent learning system.
+  - id: skill.reasoning.simulation-lab
+    name: Universal Simulation Lab
+    kind: skill
+    path: skills/simulation-lab/SKILL.md
+    domain: reasoning.simulation
+    status: active
+    classification: Public
+    aliases:
+      - simulate
+      - simulation
+      - tabletop
+      - stress-test
+      - scenario
+    summary: Model bounded systems through time using actors, state, uncertainty, branching, adversarial pressure, and evidence-aware consequence analysis.
   - id: macro.meta.create-macro
     name: Create Macro
     kind: macro
