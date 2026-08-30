@@ -154,6 +154,179 @@ artifacts:
       - professional-artifact-curator
       - capture-portfolio-candidate
     summary: Detect durable professional evidence, register private candidates, and govern reconstruction into review-gated public artifacts.
+  - id: skill.grimoire.chess-daily-reconciliation
+    name: Grimoire Chess Daily Reconciliation
+    kind: skill
+    path: skills/grimoire-chess-daily-reconciliation/SKILL.md
+    domain: grimoire.chess
+    status: active
+    classification: Public
+    aliases:
+      - chess-daily-reconciliation
+      - nightly-chess-brief
+      - run-nightly-chess-brief
+    summary: Reconcile validated engine artifacts into canonical chess records and return a provenance-backed prior-day brief.
+  - id: skill.grimoire.chess-weekly-development
+    name: Grimoire Chess Weekly Development
+    kind: skill
+    path: skills/grimoire-chess-weekly-development/SKILL.md
+    domain: grimoire.chess
+    status: active
+    classification: Public
+    aliases:
+      - chess-weekly-development
+      - weekly-chess-development
+      - review-weekly-chess-development
+    summary: Synthesize one completed week of compliant chess evidence and update living development pages only when thresholds are met.
+  - id: skill.grimoire.media-analysis-refresh
+    name: Grimoire Media Analysis Refresh
+    kind: skill
+    path: skills/grimoire-media-analysis-refresh/SKILL.md
+    domain: grimoire.media
+    status: active
+    classification: Public
+    aliases:
+      - media-analysis-refresh
+      - monthly-media-analysis
+      - refresh-media-analysis
+    summary: Refresh living media taste analysis from canonical library and semantic viewing-date evidence without rewriting source records.
+  - id: skill.grimoire.retrieval-regression
+    name: Grimoire Retrieval Regression
+    kind: skill
+    path: skills/grimoire-retrieval-regression/SKILL.md
+    domain: grimoire.retrieval
+    status: active
+    classification: Public
+    aliases:
+      - retrieval-regression
+      - grimoire-retrieval-eval
+      - run-retrieval-regression
+    summary: Execute the canonical retrieval golden suite, record verdicts, and surface regressions without unauthorized remediation.
+  - id: skill.grimoire.health-check
+    name: Grimoire Health Check
+    kind: skill
+    path: skills/grimoire-health-check/SKILL.md
+    domain: grimoire.operations
+    status: active
+    classification: Public
+    aliases:
+      - grimoire-health-check
+      - run-grimoire-health-check
+    summary: Refresh Grimoire health signals, record a historical run, and reconcile operator state when findings change.
+  - id: skill.grimoire.spirituality-center-review
+    name: Grimoire Spirituality Center Review
+    kind: skill
+    path: skills/grimoire-spirituality-center-review/SKILL.md
+    domain: grimoire.spirituality
+    status: active
+    classification: Public
+    aliases:
+      - spirituality-center-review
+      - review-spirituality-center
+    summary: Reconcile configured spiritual-practice pages from private evidence while preserving doctrinal differences and provenance.
+  - id: skill.grimoire.happiness-list-review
+    name: Grimoire Happiness List Review
+    kind: skill
+    path: skills/grimoire-happiness-list-review/SKILL.md
+    domain: grimoire.personal
+    status: active
+    classification: Public
+    aliases:
+      - happiness-list-review
+      - review-happiness-list
+    summary: Maintain a simple evidence-backed list of grounded, reusable sources of enjoyment without exposing private context.
+  - id: skill.grimoire.career-evidence-refresh
+    name: Grimoire Career Evidence Refresh
+    kind: skill
+    path: skills/grimoire-career-evidence-refresh/SKILL.md
+    domain: grimoire.career
+    status: active
+    classification: Professional Portfolio
+    aliases:
+      - career-evidence-refresh
+      - refresh-career-evidence
+    summary: Incrementally update a private professional capability profile from verified evidence while preserving claim boundaries.
+  - id: skill.grimoire.living-portrait-refresh
+    name: Grimoire Living Portrait Refresh
+    kind: skill
+    path: skills/grimoire-living-portrait-refresh/SKILL.md
+    domain: grimoire.personal
+    status: active
+    classification: Public
+    aliases:
+      - living-portrait-refresh
+      - refresh-living-portrait
+    summary: Refresh a private living personal profile from direct journal evidence while preserving confidence and contradiction.
+  - id: skill.grimoire.financial-narrative-update
+    name: Grimoire Financial Narrative Update
+    kind: skill
+    path: skills/grimoire-financial-narrative-update/SKILL.md
+    domain: grimoire.finance
+    status: active
+    classification: Public
+    aliases:
+      - financial-narrative-update
+      - update-financial-narrative
+    summary: Add a provenance-aware financial baseline and longitudinal interpretation using private runtime classification rules.
+  - id: skill.grimoire.weekly-finance-review
+    name: Grimoire Weekly Finance Review
+    kind: skill
+    path: skills/grimoire-weekly-finance-review/SKILL.md
+    domain: grimoire.finance
+    status: active
+    classification: Public
+    aliases:
+      - weekly-finance-review
+      - review-weekly-finances
+      - weekly-finances-update
+    summary: Compare current spending and net worth with prior periods and return a concise uncertainty-aware action review.
+  - id: skill.grimoire.daily-tao
+    name: Grimoire Daily Tao
+    kind: skill
+    path: skills/grimoire-daily-tao/SKILL.md
+    domain: grimoire.spirituality
+    status: active
+    classification: Public
+    aliases:
+      - daily-tao
+      - create-daily-tao-entry
+    summary: Create a deterministic, source-verified, journal-ready Tao Te Ching entry for the user's local date.
+  - id: skill.grimoire.grand-line-archive
+    name: Grimoire Grand Line Archive
+    kind: skill
+    path: skills/grimoire-grand-line-archive/SKILL.md
+    domain: grimoire.media
+    status: active
+    classification: Public
+    aliases:
+      - grand-line-archive
+      - maintain-grand-line-archive
+      - grand-line-archive-upkeep
+    summary: Reconcile new One Piece notes into a canonical continuity-aware archive with explicit fidelity and source custody.
+  - id: skill.grimoire.garden-pass
+    name: Grimoire Garden Pass
+    kind: skill
+    path: skills/grimoire-garden-pass/SKILL.md
+    domain: grimoire.operations
+    status: active
+    classification: Public
+    aliases:
+      - grimoire-garden-pass
+      - run-grimoire-garden-pass
+      - garden-pass
+    summary: Perform bounded low-risk Grimoire knowledge maintenance, bridge review, and backup-health inspection.
+  - id: skill.work.microsoft-365.admin-brief
+    name: Microsoft 365 Admin Brief
+    kind: skill
+    path: skills/m365-admin-brief/SKILL.md
+    domain: work.microsoft-365
+    status: active
+    classification: Professional Portfolio
+    aliases:
+      - m365-admin-brief
+      - create-m365-admin-brief
+      - microsoft-365-admin-brief
+    summary: Brief consequential Microsoft 365 administration changes with authoritative sources, rollout status, risks, and actions.
   - id: prompt.writing.creative.iterative-story-workshop
     name: Iterative Story Workshop
     kind: prompt
