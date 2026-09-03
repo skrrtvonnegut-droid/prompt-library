@@ -12,7 +12,8 @@ Use this skill when the user:
 
 - invokes `/skill`, `/prompt`, `/skills`, or a registered macro alias
 - names a known library artifact
-- asks to use "our" prompt, macro, workflow, or skill
+- asks to use "our" prompt, macro, workflow, skill, spell, or forbidden spell
+- invokes `/spells`, `/spell`, or an authorized private `/forbidden-spell` form
 - asks what reusable capabilities exist for a task
 - wants to inspect, execute, trace, or update a registry artifact
 
@@ -52,6 +53,13 @@ Fetch the current public `catalog.yml`.
 When the request may refer to a private alias or private personal skill and authorized overlay access is available, load that overlay. An overlay may extend or target public artifacts but must not replace public canonical bodies with competing copies.
 
 ### 3. Resolve the selector
+
+Interpret Grimoire vocabulary aliases as scoped kind filters before matching an individual artifact:
+
+- `spell`, `spells`, `/spell`, and `/spells` mean `kind: skill` with a canonical body in the public Prompt Library;
+- `forbidden spell`, `forbidden-spell`, `/forbidden-spell`, and plural forms mean `kind: skill` with a canonical Personal Private body in the authorized private overlay.
+
+A private alias, default, or wrapper that only targets a public stable ID remains attached to a public spell and is not a forbidden spell. Platform/plugin-installed skills are outside this vocabulary unless deliberately registered in the Prompt Library. The word “forbidden” is flavor only and never relaxes classification or access controls.
 
 Resolve in this order:
 
@@ -98,7 +106,7 @@ Use information already present in the conversation or connected sources. Ask fo
 
 ### 7. Execute or present
 
-- **Browse:** Return a compact list containing name, stable ID, kind, useful aliases, and summary.
+- **Browse:** Return a compact list containing name, stable ID, kind, useful aliases, and summary. When a Grimoire vocabulary form scoped the request, label matching skills as spells or forbidden spells while preserving the canonical `kind: skill`.
 - **Inspect:** Explain purpose, inputs, dependencies, procedure, output contract, and meaningful limitations. Do not run it.
 - **Execute:** Apply the canonical artifact to available source material. Follow its output contract and surface uncertainty.
 
