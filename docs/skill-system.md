@@ -44,6 +44,17 @@ A reusable instruction set executed with user-provided inputs. Use a prompt when
 
 A routed capability with an explicit operating procedure. Use a skill when the work may call tools, coordinate several artifacts, require dependencies, enforce guardrails, handle failure modes, or choose among multiple paths. Skills use a directory with `SKILL.md` as the entry point.
 
+#### Grimoire vocabulary aliases
+
+The registry keeps `skill` as the canonical machine kind and `skill.*` as the stable-ID prefix. Grimoire deployments may use these human-facing type aliases:
+
+- **Spell** (`spell`, `spells`) — a self-hosted skill whose canonical body is stored in the public Prompt Library.
+- **Forbidden spell** (`forbidden spell`, `forbidden-spell`, and plural forms) — a Personal Private skill whose canonical body is stored in an authorized private overlay such as Grimoire Core.
+
+These are kind-and-scope aliases, not artifact aliases or new security classifications. They do not rename files, change stable IDs, grant access, or include platform/plugin-installed skills unless those skills are deliberately registered in the Prompt Library. A private alias or runtime default that merely targets a public skill still points to a public spell; it is not itself a forbidden spell.
+
+Here, **self-hosted** means owned and versioned in the Prompt Library rather than installed from a platform or plugin. It does not imply self-hosting the Git service.
+
 ### Macro
 
 A compact named command that expands into a prompt or skill invocation. A macro should not become a second copy of a long prompt; prefer referencing a stable artifact ID and supplying only defaults or additional context.
@@ -67,6 +78,8 @@ Titles, aliases, and paths may evolve. The stable ID should remain unchanged unl
 
 ## Resolution Algorithm
 
+Interpret a vocabulary alias before resolving an individual artifact: `spell` or `spells` scopes the request to `kind: skill` in the public registry. An authorized deployment may use `forbidden spell` variants to scope the request to private-overlay skills with canonical private bodies.
+
 Resolve in this order:
 
 1. **Exact ID** — case-sensitive stable ID match.
@@ -83,7 +96,9 @@ Recommended forms:
 
 ```text
 /skills [optional topic]
+/spells [optional topic]
 /skill <id-or-alias> [inputs]
+/spell <id-or-alias> [inputs]
 /prompt <id-or-alias> [inputs]
 /<registered-macro-alias> [inputs]
 ```
@@ -95,6 +110,8 @@ Use the KB Writer on these licensing notes.
 Run the journal mirror across my entries from this month.
 Use our tenant health digest prompt.
 ```
+
+An authorized private deployment may additionally recognize `/forbidden-spells [topic]` for Browse mode and `/forbidden-spell <id-or-alias> [inputs]` for Inspect or Execute mode.
 
 The leading slash is a convention, not a requirement.
 
