@@ -15,6 +15,9 @@ repository:
     prompt_prefix: /prompt
     macro_prefix: /
     natural_language_resolution: true
+    public_skill_type_aliases:
+      - spell
+      - spells
 artifact_kinds:
   prompt: A reusable instruction set executed with user-provided inputs.
   skill: A routed capability with procedure, dependencies, guardrails, and an output contract.
@@ -261,9 +264,12 @@ artifacts:
     classification: Public
     aliases:
       - /skills
+      - /spells
       - list-skills
       - browse-skills
-    summary: Browse or filter the registry without loading full artifact bodies.
+      - list-spells
+      - browse-spells
+    summary: Browse or filter the registry without loading full artifact bodies; /spells limits browsing to public self-hosted skills.
   - id: macro.meta.prompt-engineer
     name: Prompt Engineer
     kind: macro
